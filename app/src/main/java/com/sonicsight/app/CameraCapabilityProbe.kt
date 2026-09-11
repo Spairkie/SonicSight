@@ -25,7 +25,7 @@ object CameraCapabilityProbe {
             val c = manager.getCameraCharacteristics(id)
             if (c.get(CameraCharacteristics.LENS_FACING) != CameraCharacteristics.LENS_FACING_BACK) continue
 
-            val capabilities = c.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES).orEmpty()
+            val capabilities = c.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES) ?: intArrayOf()
             val map = c.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
             val highSpeed = mutableListOf<Pair<Size, Range<Int>>>()
             if (capabilities.contains(CameraMetadata.REQUEST_AVAILABLE_CAPABILITIES_CONSTRAINED_HIGH_SPEED_VIDEO) && map != null) {
