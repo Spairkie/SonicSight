@@ -4,6 +4,8 @@ SonicSight is an experimental Android **visual microphone / optical vibrometry**
 
 The project is intentionally measurement-first. The near-term goal is to prove repeatable frequency recovery on ordinary Android hardware before attempting intelligible speech reconstruction.
 
+<p align="center"><img src="assets/signal-pipeline.svg" width="800" alt="Conceptual signal pipeline: camera frame to motion estimation to vibration waveform to tone measurement (experiment)"></p>
+
 ## Current state
 
 - Camera2 capability probe for rear-camera HFR modes, OIS, and EIS.

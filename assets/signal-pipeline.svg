@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="796" viewBox="0 0 960 796">
+  <defs>
+    <pattern id="scanG" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1.2" y="0" fill="#ffffff" opacity="0.022"/>
+    </pattern>
+  </defs>
+
+  <rect x="2" y="2" width="956" height="792" rx="14" fill="#070b08" stroke="#1d3a26" stroke-width="2"/>
+  <rect x="2" y="2" width="956" height="792" rx="14" fill="url(#scanG)"/>
+
+  <g font-family="Menlo,Consolas,'DejaVu Sans Mono',monospace">
+    <text x="34" y="44" font-size="17" fill="#33ff66">SonicSight — visual microphone, conceptually</text>
+    <text x="34" y="64" font-size="12" fill="#54705f">camera frame → motion estimation → vibration waveform → tone measurement</text>
+    <rect x="806" y="26" width="122" height="24" rx="12" fill="#0f1a12" stroke="#1d3a26"/>
+    <text x="867" y="43" text-anchor="middle" font-size="11" fill="#7ba98c" letter-spacing="1">CONCEPTUAL</text>
+
+    <!-- spine -->
+    <line x1="480" y1="92" x2="480" y2="660" stroke="#1d3a26" stroke-width="2"/>
+
+    <!-- stage 1 -->
+    <circle cx="480" cy="128" r="14" fill="#0f2417" stroke="#2fae5f" stroke-width="2"/>
+    <text x="480" y="133" text-anchor="middle" font-size="13" fill="#33ff66">1</text>
+    <rect x="180" y="96" width="280" height="64" rx="8" fill="#0a100c" stroke="#2fae5f" stroke-width="1.3"/>
+    <text x="200" y="120" font-size="13" fill="#e9f5ec">capture — video only</text>
+    <text x="200" y="142" font-size="11.5" fill="#7ba98c">HFR ≥120 fps · stabilization off</text>
+    <rect x="500" y="96" width="280" height="64" rx="8" fill="#0a100c" stroke="#1d3a26" stroke-width="1.2"/>
+    <text x="520" y="120" font-size="13" fill="#e9f5ec">movable ROI overlay</text>
+    <text x="520" y="142" font-size="11.5" fill="#7ba98c">only luminance rows in the region</text>
+
+    <!-- stage 2 -->
+    <circle cx="480" cy="232" r="14" fill="#0f2417" stroke="#2fae5f" stroke-width="2"/>
+    <text x="480" y="237" text-anchor="middle" font-size="13" fill="#33ff66">2</text>
+    <rect x="300" y="200" width="360" height="64" rx="8" fill="#0a100c" stroke="#2fae5f" stroke-width="1.3"/>
+    <text x="320" y="224" font-size="13" fill="#e9f5ec">offline decode → YUV frames</text>
+    <text x="320" y="246" font-size="11.5" fill="#7ba98c">MediaExtractor + MediaCodec → CPU frames</text>
+
+    <!-- stage 3 -->
+    <circle cx="480" cy="348" r="14" fill="#0f2417" stroke="#2fae5f" stroke-width="2"/>
+    <text x="480" y="353" text-anchor="middle" font-size="13" fill="#33ff66">3</text>
+    <rect x="180" y="304" width="284" height="88" rx="8" fill="#0a100c" stroke="#2fae5f" stroke-width="1.3"/>
+    <text x="200" y="330" font-size="13" fill="#e9f5ec">scanline motion estimation</text>
+    <text x="200" y="352" font-size="11.5" fill="#7ba98c">zero-mean normalized</text>
+    <text x="200" y="372" font-size="11.5" fill="#7ba98c">cross-correlation + sub-pixel fit</text>
+    <rect x="500" y="304" width="280" height="88" rx="8" fill="#0a100c" stroke="#1d3a26" stroke-width="1.2"/>
+    <text x="520" y="330" font-size="13" fill="#e9f5ec">rolling-shutter timebase</text>
+    <text x="520" y="352" font-size="11.5" fill="#7ba98c">rolling-shutter skew</text>
+    <text x="520" y="372" font-size="11.5" fill="#7ba98c">when exposed by the HAL</text>
+
+    <!-- stage 4: waveform -->
+    <circle cx="480" cy="460" r="14" fill="#0f2417" stroke="#2fae5f" stroke-width="2"/>
+    <text x="480" y="465" text-anchor="middle" font-size="13" fill="#33ff66">4</text>
+    <rect x="300" y="416" width="360" height="88" rx="8" fill="#0a100c" stroke="#2fae5f" stroke-width="1.3"/>
+    <text x="320" y="440" font-size="13" fill="#e9f5ec">resample → condition → waveform</text>
+    <text x="320" y="462" font-size="11.5" fill="#7ba98c">non-uniform timeline → PCM, gaps preserved</text>
+    <path d="M320,484 q8,-14 16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0" fill="none" stroke="#33ff66" stroke-width="1.6" opacity="0.9"/>
+
+    <!-- stage 5: FFT -->
+    <circle cx="480" cy="588" r="14" fill="#0f2417" stroke="#2fae5f" stroke-width="2"/>
+    <text x="480" y="593" text-anchor="middle" font-size="13" fill="#33ff66">5</text>
+    <rect x="300" y="544" width="360" height="104" rx="8" fill="#0a100c" stroke="#2fae5f" stroke-width="1.3"/>
+    <text x="320" y="568" font-size="13" fill="#e9f5ec">FFT → dominant frequency</text>
+    <text x="320" y="590" font-size="11.5" fill="#7ba98c">controlled-tone validation</text>
+    <text x="320" y="612" font-size="11.5" fill="#7ba98c">recovered-&lt;ts&gt;.wav + experiment-&lt;ts&gt;.json</text>
+    <text x="320" y="632" font-size="11" fill="#54705f">artifacts stay on-device</text>
+    <g>
+      <rect x="606" y="606" width="9" height="12" fill="#1d3a26"/>
+      <rect x="619" y="598" width="9" height="20" fill="#1d3a26"/>
+      <rect x="632" y="586" width="9" height="32" fill="#2fae5f"/>
+      <rect x="645" y="600" width="9" height="18" fill="#1d3a26"/>
+      <text x="632" y="640" text-anchor="middle" font-size="10" fill="#7ba98c">FFT peak</text>
+    </g>
+
+    <!-- honesty footer -->
+    <line x1="34" y1="668" x2="926" y2="668" stroke="#1d3a26" stroke-width="1"/>
+    <text x="480" y="696" text-anchor="middle" font-size="12.5" fill="#ffd166">experiment — measurement first: no microphone, no network permissions</text>
+    <text x="480" y="720" text-anchor="middle" font-size="12" fill="#54705f">first milestone: recover 100 / 200 / 440 Hz tones within ~2% on 3 consecutive captures</text>
+    <text x="480" y="744" text-anchor="middle" font-size="12" fill="#54705f">not claiming conversation recovery — a result only counts when it survives the controls</text>
+    <text x="480" y="772" text-anchor="middle" font-size="11.5" fill="#3d5546">◈ Android experiment · JVM-tested DSP primitives · CI builds on GitHub Actions</text>
+  </g>
+</svg>
