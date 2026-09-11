@@ -69,3 +69,7 @@ These artifacts stay local to the device in the current prototype.
 ## Privacy posture
 
 SonicSight is designed as an explicit foreground measurement tool. The Android manifest requests camera access only. It intentionally does not request microphone or internet permissions.
+
+---
+
+*An experiment by [Hans Sai](https://builtbysai.com).*
